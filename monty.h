@@ -1,6 +1,13 @@
 #ifndef MONTY
 #define MONTY
 
+#include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
+
+extern char *args;
+
 /******** STRUCTS ********/
 
 /**
@@ -32,5 +39,20 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/****** Stack Functions ******/
+stack_t *push(stack_t **stack, int n);
+int pop(stack_t **stack, int *data);
+int top(stack_t **stack, int *data);
+int empty(stack_t **stack);
+
+/****** Operations Funcitons ******/
+void (*get_op(char *op))(stack_t **stack, unsigned int line_number);
+void push_op(stack_t **stack, unsigned int line_number);
+void pall_op(stack_t **stack, unsigned int line_number);
+
+/****** Error Handling ******/
+void print_error(unsigned int line_number, char *message);
+void print_memoryError();
 
 #endif
