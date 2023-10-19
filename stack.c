@@ -16,7 +16,7 @@ stack_t *push(stack_t **stack, int data)
     
     newptr = malloc(sizeof(*newptr));
     if (!newptr)
-        print_memoryError();
+        print_errorMessage("Error: malloc failed", NULL);
     newptr->n = data, newptr->prev = NULL, newptr->next = *stack;
     if (*stack)
         (*stack)->prev = newptr;

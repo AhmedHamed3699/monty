@@ -13,7 +13,7 @@ void push_op(stack_t **stack, unsigned int line_number)
 
     data = atoi(args);
     if (!args || (args[0] != '0' && !data))
-        print_error(line_number, "usage: push integer");
+        print_error(line_number, "usage: push integer", NULL);
     
     push(stack, data);
 }

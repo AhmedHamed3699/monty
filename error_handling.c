@@ -4,21 +4,31 @@
  * print_error - printing error to stderr
  * @line_number: line number
  * @message: message string
+ * @addition: an additional string
  *
  * Return: void
  */
-void print_error(unsigned int line_number, char *message)
+void print_error(unsigned int line_number, char *message, char *addition)
 {
-    fprintf(stderr, "L%i: %s", line_number, message);
+    if (addition)
+        fprintf(stderr, "L%i: %s %s\n", line_number, message, addition);
+    else
+        fprintf(stderr, "L%i: %s\n", line_number, message);
     exit(EXIT_FAILURE);
 }
 
 /**
- * print_memoryError - printing memory error to stderr
+ * print_errorMessage - printing error message to stderr
+ * @message: message string
+ * @addition: an additional string
+ * 
  * Return: void
  */
-void print_memoryError()
+void print_errorMessage(char *message, char *addition)
 {
-    fprintf(stderr, "Error: malloc failed");
+    if (addition)
+        fprintf(stderr, "%s %s\n", message, addition);
+    else
+        fprintf(stderr, "%s\n", message);
     exit(EXIT_FAILURE);
 }

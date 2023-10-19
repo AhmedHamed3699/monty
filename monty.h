@@ -5,6 +5,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 extern char *args;
 
@@ -53,6 +55,6 @@ void pall_op(stack_t **stack, unsigned int line_number);
 
 /****** Error Handling ******/
 void print_error(unsigned int line_number, char *message);
-void print_memoryError();
+void print_errorMessage(char *message, char *addition);
 
 #endif
