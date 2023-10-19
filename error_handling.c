@@ -40,3 +40,19 @@ void print_errorMessage(stack_t **stack, char *msg, char *addition)
 	freeAll(stack);
 	exit(EXIT_FAILURE);
 }
+
+/**
+ * print_fileError - printing any file error message to stderr
+ * @msg: message string
+ * @addition: an additional string
+ *
+ * Return: void
+ */
+void print_fileError(char *msg, char *addition)
+{
+	if (addition)
+		fprintf(stderr, "%s %s\n", msg, addition);
+	else
+		fprintf(stderr, "%s\n", msg);
+	exit(EXIT_FAILURE);
+}

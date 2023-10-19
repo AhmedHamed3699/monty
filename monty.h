@@ -61,5 +61,6 @@ void pop_op(stack_t **stack, unsigned int line_number);
 /****** Error Handling ******/
 void print_error(stack_t **stack, int line_number, char *msg, char *addition);
 void print_errorMessage(stack_t **stack, char *msg, char *addition);
+void print_fileError(char *msg, char *addition);
 
 #endif

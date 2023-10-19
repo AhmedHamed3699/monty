@@ -19,10 +19,10 @@ int main(int argc, char **argv)
 	void (*instruction)(stack_t **stack, unsigned int line_number);
 
 	if (argc != 2)
-		print_errorMessage(&stack, "USAGE: monty file", NULL);
+		print_fileError("USAGE: monty file", NULL);
 	fp = fopen(argv[1], "r");
 	if (!fp)
-		print_errorMessage(&stack, "Error: Can't open file", argv[1]);
+		print_fileError("Error: Can't open file", argv[1]);
 
 	cur_line = NULL, r = getline(&cur_line, &size, fp);
 	while (r > 0)
