@@ -56,3 +56,18 @@ void pint_op(stack_t **stack, unsigned int line_number)
 		print_error(stack, line_number, "can't pint, stack empty", NULL);
 	printf("%i\n", data);
 }
+
+/**
+ * pop_op - removes the top element of the stack
+ * @stack: the stack
+ * @line_number: line number
+ *
+ * Return: void
+ */
+void pop_op(stack_t **stack, unsigned int line_number)
+{
+	int data;
+
+	if (!pop(stack, &data))
+		print_error(stack, line_number, "can't pop an empty stack", NULL);
+}
