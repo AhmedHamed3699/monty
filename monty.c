@@ -1,5 +1,8 @@
 #include "monty.h"
 
+FILE *fp;
+char *cur_line;
+
 /**
  * main - entry point
  * @argc: arguments count
@@ -9,30 +12,36 @@
  */
 int main(int argc, char **argv)
 {
-	unsigned int fd, line_number = 1, size = 0;
+	size_t line_number = 1, size = 0;
 	ssize_t r = 1;
-	char *inst = NULL, op;
+	char *op;
+	stack_t *stack = NULL;
 	void (*instruction)(stack_t **stack, unsigned int line_number);
 
 	if (argc != 2)
-		print_errorMessage("USAGE: monty file", NULL);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		print_errorMessage("Error: Can't open file", argv[1]);
+		print_errorMessage(&stack, "USAGE: monty file", NULL);
+	fp = fopen(argv[1], "r");
+	if (!fp)
+		print_errorMessage(&stack, "Error: Can't open file", argv[1]);
 
-	r = read(fd, inst, size);
+	cur_line = NULL, r = getline(&cur_line, &size, fp);
 	while (r > 0)
 	{
-		op = strtok(inst, " ");
+		cur_line[strlen(cur_line) - 1] = '\0';
+		op = strtok(cur_line, " ");
 		if (op)
 		{
 			instruction = get_op(op);
+			if (instruction == NULL)
+				print_error(&stack, line_number, "unknown instruction", op);
+			instruction(&stack, line_number);
 		}
-		free(inst);
-		inst = NULL, r = read(fd, inst, size);
+		free(cur_line);
+		cur_line = NULL, r = getline(&cur_line, &size, fp);
 		line_number++;
 	}
-	free(inst);
-	close(fd);
+	free(cur_line);
+	fclose(fp);
+	freeAll(&stack);
 	return (EXIT_SUCCESS);
 }

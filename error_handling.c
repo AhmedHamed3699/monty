@@ -3,32 +3,40 @@
 /**
  * print_error - printing error to stderr
  * @line_number: line number
- * @message: message string
+ * @msg: message string
  * @addition: an additional string
+ * @stack: the stack
  *
  * Return: void
  */
-void print_error(unsigned int line_number, char *message, char *addition)
+void print_error(stack_t **stack, int line_number, char *msg, char *addition)
 {
-    if (addition)
-        fprintf(stderr, "L%i: %s %s\n", line_number, message, addition);
-    else
-        fprintf(stderr, "L%i: %s\n", line_number, message);
-    exit(EXIT_FAILURE);
+	if (addition)
+		fprintf(stderr, "L%i: %s %s\n", line_number, msg, addition);
+	else
+		fprintf(stderr, "L%i: %s\n", line_number, msg);
+	free(cur_line);
+	fclose(fp);
+	freeAll(stack);
+	exit(EXIT_FAILURE);
 }
 
 /**
  * print_errorMessage - printing error message to stderr
- * @message: message string
+ * @msg: message string
  * @addition: an additional string
- * 
+ * @stack: the stack
+ *
  * Return: void
  */
-void print_errorMessage(char *message, char *addition)
+void print_errorMessage(stack_t **stack, char *msg, char *addition)
 {
-    if (addition)
-        fprintf(stderr, "%s %s\n", message, addition);
-    else
-        fprintf(stderr, "%s\n", message);
-    exit(EXIT_FAILURE);
+	if (addition)
+		fprintf(stderr, "%s %s\n", msg, addition);
+	else
+		fprintf(stderr, "%s\n", msg);
+	free(cur_line);
+	fclose(fp);
+	freeAll(stack);
+	exit(EXIT_FAILURE);
 }

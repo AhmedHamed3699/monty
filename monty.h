@@ -1,14 +1,16 @@
 #ifndef MONTY
 #define MONTY
 
-#include <stdio.h>
+#define _GNU_SOURCE
+#include <fcntl.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <fcntl.h>
 
-extern char *args;
+extern char *cur_line;
+extern FILE *fp;
 
 /******** STRUCTS ********/
 
@@ -47,6 +49,7 @@ stack_t *push(stack_t **stack, int n);
 int pop(stack_t **stack, int *data);
 int top(stack_t **stack, int *data);
 int empty(stack_t **stack);
+void freeAll(stack_t **stack);
 
 /****** Operations Funcitons ******/
 void (*get_op(char *op))(stack_t **stack, unsigned int line_number);
@@ -54,7 +57,7 @@ void push_op(stack_t **stack, unsigned int line_number);
 void pall_op(stack_t **stack, unsigned int line_number);
 
 /****** Error Handling ******/
-void print_error(unsigned int line_number, char *message);
-void print_errorMessage(char *message, char *addition);
+void print_error(stack_t **stack, int line_number, char *msg, char *addition);
+void print_errorMessage(stack_t **stack, char *msg, char *addition);
 
 #endif

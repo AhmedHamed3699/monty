@@ -9,13 +9,13 @@
  */
 void push_op(stack_t **stack, unsigned int line_number)
 {
-    int data;
+	int data;
+	char *args = strtok(NULL, " ");
 
-    data = atoi(args);
-    if (!args || (args[0] != '0' && !data))
-        print_error(line_number, "usage: push integer", NULL);
-    
-    push(stack, data);
+	data = atoi(args);
+	if (!args || (args[0] != '0' && !data))
+		print_error(stack, line_number, "usage: push integer", NULL);
+	push(stack, data);
 }
 
 /**
@@ -27,15 +27,15 @@ void push_op(stack_t **stack, unsigned int line_number)
  */
 void pall_op(stack_t **stack, unsigned int line_number)
 {
-    int data;
-    stack_t *tmpStack;
-    (void) line_number;
+	int data;
+	stack_t *tmpStack = NULL;
+	(void)line_number;
 
-    while(!pop(stack, &data))
-    {
-        push(&tmpStack, data);
-        printf("%i\n", data);
-    }
-    while(!pop(&tmpStack, &data))
-        push(stack, data);
+	while (pop(stack, &data))
+	{
+		push(&tmpStack, data);
+		printf("%i\n", data);
+	}
+	while (pop(&tmpStack, &data))
+		push(stack, data);
 }

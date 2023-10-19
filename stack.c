@@ -9,19 +9,19 @@
  */
 stack_t *push(stack_t **stack, int data)
 {
-    stack_t *newptr;
+	stack_t *newptr;
 
-    if (!stack)
-        return (NULL);
-    
-    newptr = malloc(sizeof(*newptr));
-    if (!newptr)
-        print_errorMessage("Error: malloc failed", NULL);
-    newptr->n = data, newptr->prev = NULL, newptr->next = *stack;
-    if (*stack)
-        (*stack)->prev = newptr;
-    *stack = newptr;
-    return (newptr);
+	if (!stack)
+		return (NULL);
+
+	newptr = malloc(sizeof(*newptr));
+	if (!newptr)
+		print_errorMessage(stack, "Error: malloc failed", NULL);
+	newptr->n = data, newptr->prev = NULL, newptr->next = *stack;
+	if (*stack)
+		(*stack)->prev = newptr;
+	*stack = newptr;
+	return (newptr);
 }
 
 /**
@@ -33,21 +33,21 @@ stack_t *push(stack_t **stack, int data)
  */
 int pop(stack_t **stack, int *data)
 {
-    stack_t *toDelete;
+	stack_t *toDelete;
 
-    if (!stack)
-        return (0);
+	if (!stack)
+		return (0);
 
-    toDelete = *stack;
-    if (!toDelete)
-        return (0);
-    
-    *stack = (*stack)->next;
-    *data = toDelete->n;
-    free(toDelete);
-    if (*stack)
-        (*stack)->prev = NULL;
-    return (1);
+	toDelete = *stack;
+	if (!toDelete)
+		return (0);
+
+	*stack = (*stack)->next;
+	*data = toDelete->n;
+	free(toDelete);
+	if (*stack)
+		(*stack)->prev = NULL;
+	return (1);
 }
 
 /**
@@ -59,11 +59,11 @@ int pop(stack_t **stack, int *data)
  */
 int top(stack_t **stack, int *data)
 {
-    if (!stack || !(*stack))
-        return (0);
+	if (!stack || !(*stack))
+		return (0);
 
-    *data = (*stack)->n;
-    return (1);
+	*data = (*stack)->n;
+	return (1);
 }
 
 /**
@@ -74,7 +74,23 @@ int top(stack_t **stack, int *data)
  */
 int empty(stack_t **stack)
 {
-    if (!stack || !(*stack))
-        return (1);
-    return (0);
+	if (!stack || !(*stack))
+		return (1);
+	return (0);
+}
+
+/**
+ * freeAll - free stack
+ * @stack: the stack
+ *
+ * Return: void
+ */
+void freeAll(stack_t **stack)
+{
+	int data;
+
+	if (!stack)
+		return;
+	while (pop(stack, &data))
+		;
 }
