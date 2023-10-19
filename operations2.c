@@ -42,3 +42,47 @@ void pstr_op(stack_t **stack, unsigned int line_number)
 	while (pop(&tmpStack, &data))
 		push(stack, data);
 }
+
+/**
+ * rotl_op - rotates the stack to the top
+ * @stack: the stack
+ * @line_number: line number
+ *
+ * Return: void
+ */
+void rotl_op(stack_t **stack, unsigned int line_number)
+{
+	int data, first_element;
+	stack_t *tmpStack = NULL;
+	(void)line_number;
+
+	if (!pop(stack, &first_element))
+		return;
+	while (pop(stack, &data))
+		push(&tmpStack, data);
+	push(stack, first_element);
+	while (pop(&tmpStack, &data))
+		push(stack, data);
+}
+
+/**
+ * rotr_op - rotates the stack to the bottom
+ * @stack: the stack
+ * @line_number: line number
+ *
+ * Return: void
+ */
+void rotr_op(stack_t **stack, unsigned int line_number)
+{
+	int data, last_element;
+	stack_t *tmpStack = NULL;
+	(void)line_number;
+
+	while (pop(stack, &data))
+		push(&tmpStack, data);
+	if (!pop(&tmpStack, &last_element))
+		return;
+	while (pop(&tmpStack, &data))
+		push(stack, data);
+	push(stack, last_element);
+}
