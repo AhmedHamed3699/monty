@@ -67,19 +67,6 @@ int top(stack_t **stack, int *data)
 }
 
 /**
- * empty - check if empty
- * @stack: the stack
- *
- * Return: 1 if empty, 0 not empty
- */
-int empty(stack_t **stack)
-{
-	if (!stack || !(*stack))
-		return (1);
-	return (0);
-}
-
-/**
  * freeAll - free stack
  * @stack: the stack
  *

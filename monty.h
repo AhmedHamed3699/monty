@@ -12,6 +12,9 @@
 extern char *cur_line;
 extern FILE *fp;
 
+/* format is 1 when it acts as a queue, and 0 when it acts as stack*/
+extern int format;
+
 /******** STRUCTS ********/
 
 /**
@@ -48,7 +51,6 @@ typedef struct instruction_s
 stack_t *push(stack_t **stack, int n);
 int pop(stack_t **stack, int *data);
 int top(stack_t **stack, int *data);
-int empty(stack_t **stack);
 void freeAll(stack_t **stack);
 
 /****** Operations Funcitons ******/

@@ -2,6 +2,7 @@
 
 FILE *fp;
 char *cur_line;
+int format;
 
 /**
  * main - entry point
@@ -24,21 +25,26 @@ int main(int argc, char **argv)
 	if (!fp)
 		print_fileError("Error: Can't open file", argv[1]);
 
-	cur_line = NULL, r = getline(&cur_line, &size, fp);
+	format = 0, cur_line = NULL, r = getline(&cur_line, &size, fp);
 	while (r > 0)
 	{
-		cur_line[strlen(cur_line) - 1] = '\0';
-		op = strtok(cur_line, " ");
+		cur_line[strlen(cur_line) - 1] = '\0', op = strtok(cur_line, " ");
 		if (op && strcmp(op, "nop") && op[0] != '#')
 		{
-			instruction = get_op(op);
-			if (instruction == NULL)
-				print_error(&stack, line_number, "unknown instruction", op);
-			instruction(&stack, line_number);
+			if (!strcmp(op, "queue"))
+				format = 1;
+			else if (!strcmp(op, "stack"))
+				format = 0;
+			else
+			{
+				instruction = get_op(op);
+				if (instruction == NULL)
+					print_error(&stack, line_number, "unknown instruction", op);
+				instruction(&stack, line_number);
+			}
 		}
 		free(cur_line);
-		cur_line = NULL, r = getline(&cur_line, &size, fp);
-		line_number++;
+		cur_line = NULL, r = getline(&cur_line, &size, fp), line_number++;
 	}
 	free(cur_line);
 	fclose(fp);
