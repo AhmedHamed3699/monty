@@ -71,3 +71,20 @@ void pop_op(stack_t **stack, unsigned int line_number)
 	if (!pop(stack, &data))
 		print_error(stack, line_number, "can't pop an empty stack", NULL);
 }
+
+/**
+ * swap_op - swaps the top two elements of the stack
+ * @stack: the stack
+ * @line_number: line number
+ *
+ * Return: void
+ */
+void swap_op(stack_t **stack, unsigned int line_number)
+{
+	int e1, e2;
+
+	if (!pop(stack, &e1) || !pop(stack, &e2))
+		print_error(stack, line_number, "can't swap, stack too short", NULL);
+	push(stack, e1);
+	push(stack, e2);
+}
