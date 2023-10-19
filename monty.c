@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 	{
 		cur_line[strlen(cur_line) - 1] = '\0';
 		op = strtok(cur_line, " ");
-		if (op)
+		if (op && strcmp(op, "nop"))
 		{
 			instruction = get_op(op);
 			if (instruction == NULL)
