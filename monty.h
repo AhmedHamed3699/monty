@@ -55,6 +55,7 @@ void freeAll(stack_t **stack);
 void (*get_op(char *op))(stack_t **stack, unsigned int line_number);
 void push_op(stack_t **stack, unsigned int line_number);
 void pall_op(stack_t **stack, unsigned int line_number);
+void pint_op(stack_t **stack, unsigned int line_number);
 
 /****** Error Handling ******/
 void print_error(stack_t **stack, int line_number, char *msg, char *addition);

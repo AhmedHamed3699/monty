@@ -39,3 +39,20 @@ void pall_op(stack_t **stack, unsigned int line_number)
 	while (pop(&tmpStack, &data))
 		push(stack, data);
 }
+
+
+/**
+ * pint_op - prints value on the top of the stack
+ * @stack: the stack
+ * @line_number: line number
+ *
+ * Return: void
+ */
+void pint_op(stack_t **stack, unsigned int line_number)
+{
+	int data;
+
+	if (!top(stack, &data))
+		print_error(stack, line_number, "can't pint, stack empty", NULL);
+	printf("%i\n", data);
+}
