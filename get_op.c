@@ -21,6 +21,8 @@ void (*get_op(char *op))(stack_t **stack, unsigned int line_number)
 		{"div", div_op},
 		{"mul", mul_op},
 		{"mod", mod_op},
+		{"pchar", pchar_op},
+		{"pstr", pstr_op},
 		{NULL, NULL}
 	};
 
