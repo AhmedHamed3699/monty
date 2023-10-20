@@ -12,9 +12,13 @@ void push_op(stack_t **stack, unsigned int line_number)
 	int data;
 	char *args = strtok(NULL, " ");
 
-	data = atoi(args);
-	if (!args || (args[0] != '0' && !data))
+	if (!args)
 		print_error(stack, line_number, "usage: push integer", NULL);
+
+	data = atoi(args);
+	if (args[0] != '0' && !data)
+		print_error(stack, line_number, "usage: push integer", NULL);
+
 	push(stack, data);
 	if (format)
 		rotl_op(stack, line_number);
